@@ -1,7 +1,4 @@
 class CourseItem:
-
-    #This is a test, let me know if you see this Hamerski
-
     def __init__(self, title, category, due_date, points_possible):
         """
         Initialize a CourseItem with the given attributes.
@@ -20,8 +17,12 @@ class CourseItem:
             self.points_earned  -- starts as None (not yet graded)
             self.completed      -- starts as False
         """
-        # TODO: Set all instance variables described above
-        pass
+        self.title = title
+        self.category = category
+        self.due_date = due_date
+        self.points_possible = points_possible
+        self.points_earned = None
+        self.completed = False
 
     def mark_complete(self):
         """
@@ -45,7 +46,8 @@ class CourseItem:
             - Must not print anything.
         """
         # TODO: Implement this method
-        pass
+        #this will simply replace the points_earned which starts as None with the desired score
+        self.points_earned = score
 
     def display_info(self):
         """
@@ -63,7 +65,19 @@ class CourseItem:
             str: The formatted item info string.
         """
         # TODO: Build and return the formatted string described above
-        pass
+        if self.points_earned is None:
+            score_text = "Not graded"
+        else:
+            score_text = self.points_earned + "/" + self.points_possible
+
+        if self.completed:
+            status = "Completed"
+        else:
+            status = "Incomplete"
+
+        info = f"{self.category}: {self.title} | Due: {self.due_date} | Score: {score_text} | Status: {status}"
+
+        return info
 
 
 # Default category weights — must sum to 100.
@@ -116,7 +130,11 @@ class Course:
             self.weights         -- a copy of DEFAULT_WEIGHTS (use dict() to copy)
         """
         # TODO: Set all instance variables described above
-        pass
+        self.course_name = course_name
+        self.course_code = course_code
+        self.instructor_name = instructor_name
+        self.items = []
+        self.weights = dict(DEFAULT_WEIGHTS)
 
     # ── Weight management ─────────────────────────────────────────────────
 
