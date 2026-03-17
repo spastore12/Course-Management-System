@@ -217,7 +217,14 @@ class Course:
             - Must not print anything.
         """
         # TODO: Loop through self.items and return the matching item or None
-        pass
+        #using the lower() function to make sure comparison is case-INsensitive
+        for item in self.items:
+            if item.title.lower() == item_title.lower():
+                return item
+
+        return None
+
+
 
     def display_items(self):
         """
@@ -228,7 +235,14 @@ class Course:
                        or ["No items found."] if the course has no items.
         """
         # TODO: Implement this method
-        pass
+        if len(self.items) == 0:
+            return ["No items found."]
+
+        formatted_items = []
+        for item in self.items:
+            formatted_items.append(item.display_info())
+
+        return formatted_items
 
     def display_pending_items(self):
         """
