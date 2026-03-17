@@ -1,4 +1,7 @@
 class CourseItem:
+
+    #This is a test, let me know if you see this Hamerski
+
     def __init__(self, title, category, due_date, points_possible):
         """
         Initialize a CourseItem with the given attributes.
