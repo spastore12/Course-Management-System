@@ -238,11 +238,12 @@ class Course:
         if len(self.items) == 0:
             return ["No items found."]
 
-        formatted_items = []
-        for item in self.items:
-            formatted_items.append(item.display_info())
+        else:
+            formatted_items = []
+            for item in self.items:
+                formatted_items.append(item.display_info())
 
-        return formatted_items
+            return formatted_items
 
     def display_pending_items(self):
         """
@@ -252,8 +253,16 @@ class Course:
             list[str]: Strings from display_info() for items where completed is False,
                        or ["No pending items."] if all items are complete.
         """
+        formatted_items = []
         # TODO: Filter items where completed == False and return their display_info() strings
-        pass
+        for item in self.items:
+            if not item.completed:
+                formatted_items.append(item.display_info())
+        # after the loop, check if the list is empty, meaning that all items are COMPLETE
+        if len(formatted_items) == 0:
+            formatted_items = ["No pending items."]
+
+        return formatted_items
 
     # ── Grade calculation ─────────────────────────────────────────────────
 
