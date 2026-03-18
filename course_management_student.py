@@ -372,4 +372,14 @@ class CourseManager:
                        or ["No courses available."] if no courses have been added.
         """
         # TODO: Implement this method
-        pass
+        formatted_courses = []
+
+        if len(self.courses) == 0:
+            formatted_courses = ["No courses available."]
+        else:
+            for course in self.courses:
+                formatted_courses.append(f"{course.course_code}: {course.course_name} ({course.instructor_name})")
+
+        return formatted_courses
+
+
