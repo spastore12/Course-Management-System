@@ -68,7 +68,7 @@ class CourseItem:
         if self.points_earned is None:
             score_text = "Not graded"
         else:
-            score_text = self.points_earned + "/" + self.points_possible
+            score_text = str(self.points_earned) + "/" + str(self.points_possible)
 
         if self.completed:
             status = "Completed"
@@ -305,7 +305,7 @@ class CourseManager:
             self.courses -- empty list (will hold Course objects)
         """
         # TODO: Set self.courses to an empty list
-        pass
+        self.courses = []
 
     def add_course(self, course):
         """
@@ -335,7 +335,10 @@ class CourseManager:
             - Must not print anything.
         """
         # TODO: Loop through self.courses and return the matching course or None
-        pass
+        for course in self.courses:
+            if course.course_name.lower() == course_name.lower():
+                return course
+        return None
 
     def find_course_by_code(self, course_code):
         """
@@ -352,7 +355,10 @@ class CourseManager:
             - Must not print anything.
         """
         # TODO: Loop through self.courses and match on course_code (case-insensitive)
-        pass
+        for course in self.courses:
+            if course.course_code.lower() == course_code.lower():
+                return course
+        return None
 
     def display_courses(self):
         """
