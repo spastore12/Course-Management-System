@@ -33,7 +33,17 @@ def prompt_course_code(manager):
         Course or None.
     """
     # TODO: Implement this helper following the steps above
-    pass
+    print("Current courses:")
+    for course in manager.display_courses():
+        print("  " + str(course))
+
+    c = input("Enter course code: ")
+    course = manager.find_course_by_code(c)
+    if course is None:
+        print("  Course not found.")
+        return None
+    else:
+        return course
 
 
 def main():
@@ -82,15 +92,33 @@ def main():
             # If None, print "Item not found."
             # Otherwise, prompt for score (float), call item.update_score()
             # Print "Score updated successfully."
-            pass
+            code = prompt_course_code(manager)
+            if code is None:
+                continue
+
+            title = input("Enter item title: ")
+            item = code.find_item(title)
+            if item is None:
+                print("Item not found.")
+            else:
+                update = float(input("Enter score earned: "))
+                item.update_score(update)
+                print("Score updated successfully.")
+
 
         elif choice == "7":
             # TODO: Call prompt_course_code(manager) to get the course
             # If None, use 'continue'
             # Print each string returned by course.display_pending_items()
-            pass
+            course = prompt_course_code(manager)
+            if course is None:
+                continue
+
+            for item in course.display_pending_items():
+                print(item)
 
         elif choice == "8":
+
             # TODO: Call prompt_course_code(manager) to get the course
             # If None, use 'continue'
             # Call course.calculate_grade()
@@ -100,7 +128,15 @@ def main():
             #   Print "  Weighted average : <percentage:.2f>%"
             #   Print "  Letter grade     : <letter>"
             #   Print a per-category breakdown (see project spec for format)
-            pass
+            course = prompt_course_code(manager)
+            if course is None:
+                continue
+
+            grade = course.calculate_grade()
+            if grade is None:
+                print("No graded items yet.")
+            else:
+                print(f"Course Grade for {course.course_code}: {course.course_name}")
 
         elif choice == "9":
             # TODO: Call prompt_course_code(manager) to get the course
@@ -112,15 +148,24 @@ def main():
             # Validate that the new weights sum to ~100
             # If valid, call course.set_weights() and print "Weights updated successfully."
             # If invalid, print "Weights must sum to 100 (got <total:.2f>). No changes made."
-            pass
+            course = prompt_course_code(manager)
+            if course is None:
+                continue
+            else:
+                print(f"Current weights for {course.course_code}:")
+                for i in course.display_weights():
+                    print(i)
+
+            #FINISH
 
         elif choice == "10":
             # TODO: Print "Exiting program." and break out of the loop
-            pass
+            print("Exiting program.")
+            break
 
         else:
             # TODO: Print "Invalid choice. Please try again."
-            pass
+            print("Invalid choice. Please try again.")
 
 
 if __name__ == "__main__":
