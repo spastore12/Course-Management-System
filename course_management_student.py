@@ -213,7 +213,7 @@ class Course:
             - Must not print anything.
         """
         # TODO: Append item to self.items
-        pass
+        self.items.append(item)
 
     def remove_item(self, item_title):
         """
@@ -231,7 +231,12 @@ class Course:
         """
         # TODO: Loop through self.items, find the match, remove it, return True
         # If not found, return False
-        pass
+        #
+        for item in self.items:
+            if item.title.lower() == item_title.lower():
+                self.items.remove(item)
+                return True
+        return False
 
     def find_item(self, item_title):
         """
@@ -324,7 +329,46 @@ class Course:
             - Must not print anything.
         """
         # TODO: Implement the weighted grade algorithm described above
-        pass
+        weighted_sum = 0
+        active_weight = 0
+
+        #loop through each category and weight
+        for category in self.weights:
+            weight = self.weights[category]
+            if weight == 0: #if category has no weight, skip
+                continue
+
+            #collect all graded items in category in graded_items
+            graded_items = []
+            for item in self.items:
+                if item.category == category and item.points_earned != None: #makes sure it has points earned
+                    graded_items.append(item)
+
+            #skips category if none exist
+            if len(graded_items) == 0:
+                continue
+
+            #creates variables for the total of each
+            total_earned = 0
+            total_possible = 0
+            for item in graded_items:
+                total_earned += item.points_earned
+                total_possible += item.points_possible
+
+            #uses the total variables to create a percentage
+            category_pct = total_earned / total_possible * 100
+
+            #adds categories' weight to running totals
+            weighted_sum += category_pct * weight
+            active_weight += weight
+
+        #returns none if nothing was graded
+        if active_weight == 0:
+            return None
+
+        #calculate final percentage and return with number grade (in CourseItem class, so have to use CourseItem in front of function name)
+        final_pct = round(weighted_sum / active_weight, 2)
+        return final_pct, CourseItem.score_to_letter(final_pct)
 
 
 class CourseManager:
@@ -349,7 +393,7 @@ class CourseManager:
             - Must not print anything.
         """
         # TODO: Append course to self.courses
-        pass
+        self.courses.append(course)
 
     def find_course(self, course_name):
         """
