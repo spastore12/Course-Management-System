@@ -178,7 +178,7 @@ class Course:
         """
         # TODO: Check that the values sum to ~100, then update self.weights
         weightSum = sum(new_weights.values())
-        if weightSum == 100.0:
+        if abs(weightSum - 100.0) < 0.01:
             self.weights = new_weights
             return True
         else:
@@ -197,7 +197,7 @@ class Course:
         # returns a new list of strings
         stringList = []
         for c in self.weights:
-            stringList.append(f"{c}: {self.weights[c]}%")
+            stringList.append(f" {c}: {self.weights[c]}%")
         return stringList
 
     # ── Item management ───────────────────────────────────────────────────
@@ -368,7 +368,7 @@ class Course:
 
         #calculate final percentage and return with number grade (in CourseItem class, so have to use CourseItem in front of function name)
         final_pct = round(weighted_sum / active_weight, 2)
-        return final_pct, CourseItem.score_to_letter(final_pct)
+        return final_pct, score_to_letter(final_pct)
 
 
 class CourseManager:
