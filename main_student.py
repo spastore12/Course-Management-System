@@ -57,11 +57,18 @@ def main():
             # TODO: Prompt for course name, course code, and instructor name
             # Create a Course object and add it to manager via manager.add_course()
             # Print "Course added successfully."
-            pass
+            name = input("Enter course name: ")
+            code = input("Enter course code: ")
+            instructor = input("Enter instructor name: ")
+            course = Course(name, code, instructor)
+            manager.add_course(course)
+            print("Course added successfully.")
 
         elif choice == "2":
             # TODO: Print each string returned by manager.display_courses()
-            pass
+            courseList = manager.display_courses()
+            for c in courseList:
+                print(c)
 
         elif choice == "3":
             # TODO: Call prompt_course_code(manager) to get the course
@@ -69,13 +76,45 @@ def main():
             # Otherwise, prompt for item title, category, due date, and points possible
             # Create a CourseItem and add it to the course via course.add_item()
             # Print "Item added successfully."
-            pass
+            print("Current Courses: ")
+            courseList = manager.display_courses()
+            for c in courseList:
+                print(c)
+
+            courseName = input("Enter course name: ")
+            course = manager.find_course(courseName)
+            if course == None:
+                print("Course not found.")
+                continue
+            else:
+                itemT = input("What is the item title? ")
+                category = input("What is the category? ")
+                date = input("What is the due date? ")
+                pointsP = int(input("How many points possible? "))
+                newItem = CourseItem(itemT,category,date,pointsP)
+                course.add_item(newItem)
+                print("Item added successfully.")
+
+
 
         elif choice == "4":
             # TODO: Call prompt_course_code(manager) to get the course
             # If None, use 'continue'
             # Otherwise, print each string returned by course.display_items()
-            pass
+            print("Current Courses: ")
+            courseList = manager.display_courses()
+            for c in courseList:
+                print(c)
+            courseName = input("Enter course name: ")
+            course = manager.find_course(courseName)
+            if course == None:
+                print("Course not found.")
+                continue
+            else:
+                itemList = course.display_items()
+                for c in itemList:
+                    print(c)
+
 
         elif choice == "5":
             # TODO: Call prompt_course_code(manager) to get the course
@@ -83,7 +122,23 @@ def main():
             # Prompt for item title, call course.find_item()
             # If None, print "Item not found."
             # Otherwise, call item.mark_complete() and print "Item marked as completed."
-            pass
+            print("Current Courses: ")
+            courseList = manager.display_courses()
+            for c in courseList:
+                print(c)
+            courseName = input("Enter course name: ")
+            course = manager.find_course(courseName)
+            if course == None:
+                print("Course not found.")
+                continue
+            else:
+                itemTitle = input("Enter an item: ")
+                result = course.find_item(itemTitle)
+                if result == None:
+                    print("Item not found.")
+                else:
+                    result.mark_complete()
+                    print("Item marked as completed.")
 
         elif choice == "6":
             # TODO: Call prompt_course_code(manager) to get the course
