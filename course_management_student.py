@@ -177,7 +177,12 @@ class Course:
             - Must not print anything.
         """
         # TODO: Check that the values sum to ~100, then update self.weights
-        pass
+        weightSum = sum(new_weights.values())
+        if weightSum == 100.0:
+            self.weights = new_weights
+            return True
+        else:
+            return False
 
     def display_weights(self):
         """
