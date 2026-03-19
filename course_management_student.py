@@ -194,8 +194,11 @@ class Course:
         Returns:
             list[str]: One string per category in self.weights.
         """
-        # TODO: Build and return the list of weight strings
-        pass
+        # returns a new list of strings
+        stringList = []
+        for c in self.weights:
+            stringList.append(f"{c}: {self.weights[c]}%")
+        return stringList
 
     # ── Item management ───────────────────────────────────────────────────
 
