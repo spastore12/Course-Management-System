@@ -32,8 +32,8 @@ class CourseItem:
             - Sets self.completed to True.
             - Must not print anything.
         """
-        # TODO: Implement this method
-        pass
+        # simply sets completed to true
+        self.completed = True
 
     def update_score(self, score):
         """
@@ -108,8 +108,31 @@ def score_to_letter(percentage):
     Returns:
         str: The corresponding letter grade string (e.g., "A", "B+", "C-").
     """
-    # TODO: Implement the letter grade scale above using if/elif/else
-    pass
+    #checks what percentage is, then gives it a Letter grade corresponding to the percentage
+    if percentage >= 93:
+        return "A"
+    elif percentage >= 90:
+        return "A-"
+    elif percentage >= 87:
+        return "B+"
+    elif percentage >= 83:
+        return "B"
+    elif percentage >= 80:
+        return "B-"
+    elif percentage >= 77:
+        return "C+"
+    elif percentage >= 73:
+        return "C"
+    elif percentage >= 70:
+        return "C-"
+    elif percentage >= 67:
+        return "D+"
+    elif percentage >= 63:
+        return "D"
+    elif percentage >= 60:
+        return "D-"
+    else:
+        return "F"
 
 
 class Course:
